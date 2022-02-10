@@ -3,7 +3,7 @@ import s from './Task.module.scss';
 const Task = (props) => {
   return (
     <div className={s.task__box}>
-      <div className={s.task}>
+      <div className={props.isCompleted ? s.task__completed : s.task}>
         {props.isCompleted ? (
           <p
             className={s.task__info_crossed}

@@ -1,3 +1,12 @@
+%task_style {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba($color: lightcoral, $alpha: 0.8);
+  padding: 5px 10px;
+  border-radius: 7px;
+}
+
 %task__info_style {
   font-size: 23px;
   max-width: 70%;
@@ -15,12 +24,7 @@
 }
 
 .task {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba($color: lightcoral, $alpha: 0.8);
-  padding: 5px 10px;
-  border-radius: 7px;
+  @extend %task_style;
 
   &__btn {
     display: block;
@@ -36,4 +40,9 @@
     text-decoration: line-through;
     @extend %task__info_style;
   }
+}
+
+.task__completed {
+  @extend %task_style;
+  background-color: rgba($color: lightcoral, $alpha: 0.4);
 }
