@@ -1,0 +1,39 @@
+%task__info {
+  font-size: 23px;
+  max-width: 70%;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+.task__box {
+  width: 100%;
+  margin-bottom: 40px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba($color: lightcoral, $alpha: 0.8);
+  padding: 5px 10px;
+  border-radius: 7px;
+
+  &__btn {
+    display: block;
+    background-color: transparent;
+    font-weight: 500;
+  }
+
+  &__info {
+    @extend %task__info;
+  }
+
+  &__info_crossed {
+    text-decoration: line-through;
+    @extend %task__info;
+  }
+}
