@@ -1,4 +1,4 @@
-%task__info {
+%task__info_style {
   font-size: 23px;
   max-width: 70%;
   line-height: 30px;
@@ -29,11 +29,11 @@
   }
 
   &__info {
-    @extend %task__info;
+    @extend %task__info_style;
   }
 
   &__info_crossed {
     text-decoration: line-through;
-    @extend %task__info;
+    @extend %task__info_style;
   }
 }
