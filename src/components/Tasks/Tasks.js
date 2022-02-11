@@ -1,10 +1,22 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  deleteTaskAC,
-  toggleTaskCompletionAC,
+  deleteTaskTC,
+  getLocalTodosAC,
+  toggleTaskCompletionTC,
 } from '../../redux/todoReducer';
 import Task from './Task/Task';
 import s from './Tasks.module.scss';
+
+const TasksContainer = (props) => {
+  useEffect(() => {
+    if (props.todos.length === 0 && localStorage.length > 0) {
+      props.getLocalTodos(JSON.parse(localStorage.getItem('todos')));
+    }
+  }, []);
+
+  return <Tasks {...props} />;
+};
 
 const Tasks = (props) => {
   const tasksElements = props.todos.map((t) => (
@@ -25,9 +37,10 @@ const mapStateToProps = (state) => ({
   todos: state.todo.todos,
 });
 
-const dispatchToProps = { 
-  deleteTask: deleteTaskAC,
-  toggleTaskCompletion: toggleTaskCompletionAC,
- };
+const dispatchToProps = {
+  deleteTask: deleteTaskTC,
+  toggleTaskCompletion: toggleTaskCompletionTC,
+  getLocalTodos: getLocalTodosAC,
+};
 
-export default connect(mapStateToProps, dispatchToProps)(Tasks);
+export default connect(mapStateToProps, dispatchToProps)(TasksContainer);

@@ -3,20 +3,10 @@ import { nanoid } from 'nanoid';
 const DELETE_TASK = 'DELETE_TASK';
 const TOGGLE_TASK_COMPLETION = 'TOGGLE_TASK_COMPLETION';
 const ADD_TASK = 'ADD_TASK';
+const GET_LOCAL_TODOS = 'GET_LOCAL_TODOS';
 
 const initialState = {
-  todos: [
-    {
-      id: 1,
-      task: 'Task 1',
-      isCompleted: true,
-    },
-    {
-      id: 2,
-      task: 'Task 2',
-      isCompleted: false,
-    },
-  ],
+  todos: [],
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -50,6 +40,11 @@ const todoReducer = (state = initialState, action) => {
           },
         ],
       };
+    case GET_LOCAL_TODOS:
+      return {
+        ...state,
+        todos: [...action.todos],
+      };
     default:
       return state;
   }
@@ -73,8 +68,41 @@ export const addTaskAC = (taskText) => ({
   taskText,
 });
 
-export const addTaskTC = (taskText) => (dispatch) => {
+export const getLocalTodosAC = (todos) => ({
+  type: GET_LOCAL_TODOS,
+  todos,
+});
+
+export const deleteTaskTC = (id) => (dispatch) => {
+  dispatch(deleteTaskAC(id));
+  const localStorageTodos = JSON.parse(localStorage.getItem('todos'));
+  localStorage.setItem(
+    'todos',
+    JSON.stringify(localStorageTodos.filter((t) => t.id !== id))
+  );
+};
+
+export const toggleTaskCompletionTC = (id, isCompleted) => (dispatch) => {
+  dispatch(toggleTaskCompletionAC(id, isCompleted));
+  const localStorageTodos = JSON.parse(localStorage.getItem('todos'));
+  localStorage.setItem(
+    'todos',
+    JSON.stringify(
+      localStorageTodos.map((t) => {
+        if (t.id === id) {
+          t.isCompleted = isCompleted;
+          return t;
+        } else {
+          return t;
+        }
+      })
+    )
+  );
+};
+
+export const addTaskTC = (taskText) => (dispatch, getState) => {
   if (taskText.length > 0) dispatch(addTaskAC(taskText));
+  localStorage.setItem('todos', JSON.stringify(getState().todo.todos));
 };
 
 export default todoReducer;
