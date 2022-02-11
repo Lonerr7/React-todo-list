@@ -73,4 +73,8 @@ export const addTaskAC = (taskText) => ({
   taskText,
 });
 
+export const addTaskTC = (taskText) => (dispatch) => {
+  if (taskText.length > 0) dispatch(addTaskAC(taskText));
+};
+
 export default todoReducer;

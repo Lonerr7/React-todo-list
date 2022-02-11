@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addTaskAC } from '../../redux/todoReducer';
+import { addTaskTC } from '../../redux/todoReducer';
 import s from './TasksInput.module.scss';
 
 const TasksInput = (props) => {
@@ -32,7 +32,7 @@ const TasksInput = (props) => {
 };
 
 const dispatchToProps = {
-  addTask: addTaskAC,
+  addTask: addTaskTC,
 };
 
 export default connect(null, dispatchToProps)(TasksInput);
