@@ -1,5 +1,8 @@
+import { nanoid } from 'nanoid';
+
 const DELETE_TASK = 'DELETE_TASK';
 const TOGGLE_TASK_COMPLETION = 'TOGGLE_TASK_COMPLETION';
+const ADD_TASK = 'ADD_TASK';
 
 const initialState = {
   todos: [
@@ -35,6 +38,18 @@ const todoReducer = (state = initialState, action) => {
           }
         }),
       };
+    case ADD_TASK:
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          {
+            id: nanoid(),
+            task: action.taskText,
+            isCompleted: false,
+          },
+        ],
+      };
     default:
       return state;
   }
@@ -52,5 +67,10 @@ export const toggleTaskCompletionAC = (id, isCompleted) => {
     isCompleted,
   };
 };
+
+export const addTaskAC = (taskText) => ({
+  type: ADD_TASK,
+  taskText,
+});
 
 export default todoReducer;
