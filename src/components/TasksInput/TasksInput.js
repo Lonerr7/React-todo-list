@@ -5,7 +5,6 @@ import TaskDeletePopup from './TaskDeletePopup/TaskDeletePopup';
 import s from './TasksInput.module.scss';
 
 const TasksInput = (props) => {
-  console.log(`TaskInput render`);
   const [taskText, setTaskText] = useState('');
   const [deleteMode, setDeleteMode] = useState(false);
 

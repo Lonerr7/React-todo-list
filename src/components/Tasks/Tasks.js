@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   deleteTaskTC,
+  editTaskInfoTC,
   getLocalTodosTC,
   toggleTaskCompletionTC,
 } from '../../redux/todoReducer';
@@ -25,6 +26,7 @@ const Tasks = (props) => {
       isCompleted={t.isCompleted}
       deleteTask={props.deleteTask}
       toggleTaskCompletion={props.toggleTaskCompletion}
+      editTaskInfo={props.editTaskInfo}
     />
   ));
 
@@ -39,6 +41,7 @@ const dispatchToProps = {
   deleteTask: deleteTaskTC,
   toggleTaskCompletion: toggleTaskCompletionTC,
   getLocalTodos: getLocalTodosTC,
+  editTaskInfo: editTaskInfoTC,
 };
 
 export default connect(mapStateToProps, dispatchToProps)(TasksContainer);

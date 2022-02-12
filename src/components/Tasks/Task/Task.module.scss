@@ -30,6 +30,8 @@
     display: block;
     background-color: transparent;
     font-weight: 500;
+    // border-radius: 30px;
+    border: none;
   }
 
   &__info {
@@ -44,5 +46,37 @@
 
 .task__completed {
   @extend %task_style;
-  background-color: rgba($color: lightcoral, $alpha: 0.4);
+  background-color: rgba($color: rgb(34, 194, 56), $alpha: 0.4);
+}
+
+.task__controls {
+  width: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit__img {
+  display: block;
+  width: 15px;
+}
+
+.edit__btn {
+  background-color: transparent;
+  display: block;
+}
+
+.task__editBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+
+.task__editInput {
+  padding: 5px;
+}
+
+.task__editSaveImg {
+  cursor: pointer;
 }

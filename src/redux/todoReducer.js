@@ -5,6 +5,7 @@ const TOGGLE_TASK_COMPLETION = 'TOGGLE_TASK_COMPLETION';
 const ADD_TASK = 'ADD_TASK';
 const GET_LOCAL_TODOS = 'GET_LOCAL_TODOS';
 const DELETE_ALL_TASKS = 'DELETE_ALL_TASKS';
+const EDIT_TASK_INFO = 'EDIT_TASK_INFO';
 
 const initialState = {
   todos: [],
@@ -51,6 +52,18 @@ const todoReducer = (state = initialState, action) => {
         ...state,
         todos: [],
       };
+    case EDIT_TASK_INFO:
+      return {
+        ...state,
+        todos: state.todos.map((t) => {
+          if (t.id === action.id) {
+            t.task = action.newTaskText;
+            return t;
+          } else {
+            return t;
+          }
+        }),
+      };
     default:
       return state;
   }
@@ -83,6 +96,12 @@ const deleteAllTasksAC = () => ({
   type: DELETE_ALL_TASKS,
 });
 
+const editTaskInfoAC = (id, newTaskText) => ({
+  type: EDIT_TASK_INFO,
+  id,
+  newTaskText,
+});
+
 export const deleteTaskTC = (id) => (dispatch) => {
   dispatch(deleteTaskAC(id));
   const localStorageTodos = JSON.parse(localStorage.getItem('todos'));
@@ -92,23 +111,11 @@ export const deleteTaskTC = (id) => (dispatch) => {
   );
 };
 
-export const toggleTaskCompletionTC = (id, isCompleted) => (dispatch) => {
-  dispatch(toggleTaskCompletionAC(id, isCompleted));
-  const localStorageTodos = JSON.parse(localStorage.getItem('todos'));
-  localStorage.setItem(
-    'todos',
-    JSON.stringify(
-      localStorageTodos.map((t) => {
-        if (t.id === id) {
-          t.isCompleted = isCompleted;
-          return t;
-        } else {
-          return t;
-        }
-      })
-    )
-  );
-};
+export const toggleTaskCompletionTC =
+  (id, isCompleted) => (dispatch, getState) => {
+    dispatch(toggleTaskCompletionAC(id, isCompleted));
+    localStorage.setItem('todos', JSON.stringify(getState().todo.todos));
+  };
 
 export const addTaskTC = (taskText) => (dispatch, getState) => {
   if (taskText.length > 0) dispatch(addTaskAC(taskText));
@@ -128,6 +135,12 @@ export const getLocalTodosTC = () => (dispatch, getState) => {
 export const deleteAllTasksTC = () => (dispatch) => {
   dispatch(deleteAllTasksAC());
   localStorage.removeItem('todos');
+};
+
+export const editTaskInfoTC = (id, newTaskText) => (dispatch, getState) => {
+  dispatch(editTaskInfoAC(id, newTaskText));
+
+  localStorage.setItem('todos', JSON.stringify(getState().todo.todos));
 };
 
 export default todoReducer;
