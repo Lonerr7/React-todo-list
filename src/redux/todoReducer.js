@@ -4,6 +4,7 @@ const DELETE_TASK = 'DELETE_TASK';
 const TOGGLE_TASK_COMPLETION = 'TOGGLE_TASK_COMPLETION';
 const ADD_TASK = 'ADD_TASK';
 const GET_LOCAL_TODOS = 'GET_LOCAL_TODOS';
+const DELETE_ALL_TASKS = 'DELETE_ALL_TASKS';
 
 const initialState = {
   todos: [],
@@ -45,6 +46,11 @@ const todoReducer = (state = initialState, action) => {
         ...state,
         todos: [...action.todos],
       };
+    case DELETE_ALL_TASKS:
+      return {
+        ...state,
+        todos: [],
+      };
     default:
       return state;
   }
@@ -71,6 +77,10 @@ export const addTaskAC = (taskText) => ({
 export const getLocalTodosAC = (todos) => ({
   type: GET_LOCAL_TODOS,
   todos,
+});
+
+const deleteAllTasksAC = () => ({
+  type: DELETE_ALL_TASKS,
 });
 
 export const deleteTaskTC = (id) => (dispatch) => {
@@ -103,6 +113,21 @@ export const toggleTaskCompletionTC = (id, isCompleted) => (dispatch) => {
 export const addTaskTC = (taskText) => (dispatch, getState) => {
   if (taskText.length > 0) dispatch(addTaskAC(taskText));
   localStorage.setItem('todos', JSON.stringify(getState().todo.todos));
+};
+
+export const getLocalTodosTC = () => (dispatch, getState) => {
+  if (
+    getState().todo.todos.length === 0 &&
+    localStorage.getItem('todos') &&
+    localStorage.length > 0
+  ) {
+    dispatch(getLocalTodosAC(JSON.parse(localStorage.getItem('todos'))));
+  }
+};
+
+export const deleteAllTasksTC = () => (dispatch) => {
+  dispatch(deleteAllTasksAC());
+  localStorage.removeItem('todos');
 };
 
 export default todoReducer;

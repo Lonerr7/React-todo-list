@@ -1,8 +1,12 @@
 .tasksInput__box {
-  display: flex;
-  justify-content: space-between;
   width: 45%;
   margin-bottom: 35px;
+}
+
+.tasksInput__inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
 }
 
 .tasksInput {
@@ -15,5 +19,15 @@
   padding: 5px;
   background-color: aqua;
   border-radius: 5px;
-  font-weight: 500; 
+  font-weight: 500;
+}
+
+.tasksInput__deleteAllBtn {
+  margin: 0 auto;
+  display: block;
+  font-weight: 500;
+  background-color: rgba($color: red, $alpha: .7);
+  padding: 5px;
+  border-radius: 5px;
+  width: 200px;
 }
