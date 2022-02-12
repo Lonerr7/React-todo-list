@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTaskTC, deleteAllTasksTC } from '../../redux/todoReducer';
+import TaskDeletePopup from './TaskDeletePopup/TaskDeletePopup';
 import s from './TasksInput.module.scss';
 
 const TasksInput = (props) => {
+  console.log(`TaskInput render`);
   const [taskText, setTaskText] = useState('');
+  const [deleteMode, setDeleteMode] = useState(false);
 
   const onTaskTextChange = (e) => {
     setTaskText(e.target.value);
@@ -16,7 +19,7 @@ const TasksInput = (props) => {
   };
 
   const onAllTasksDelete = () => {
-    props.deleteAllTasks();
+    if (props.todos.length > 0) setDeleteMode(true);
   };
 
   return (
@@ -36,13 +39,23 @@ const TasksInput = (props) => {
       <button className={s.tasksInput__deleteAllBtn} onClick={onAllTasksDelete}>
         Удалить все
       </button>
+      {deleteMode ? (
+        <TaskDeletePopup
+          setDeleteMode={setDeleteMode}
+          deleteAllTasks={props.deleteAllTasks}
+        />
+      ) : null}
     </div>
   );
 };
+
+const mapStateToProps = (state) => ({
+  todos: state.todo.todos,
+});
 
 const dispatchToProps = {
   addTask: addTaskTC,
   deleteAllTasks: deleteAllTasksTC,
 };
 
-export default connect(null, dispatchToProps)(TasksInput);
+export default connect(mapStateToProps, dispatchToProps)(TasksInput);
