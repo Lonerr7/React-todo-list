@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addTaskTC, deleteAllTasksTC } from '../../redux/todoReducer';
+import {
+  addTaskTC,
+  deleteAllTasksTC,
+  filterTodosAC,
+  getLocalTodosAC,
+} from '../../redux/todoReducer';
+import FilterBtns from './FilterBtns/FilterBtns';
 import TaskDeletePopup from './TaskDeletePopup/TaskDeletePopup';
 import s from './TasksInput.module.scss';
 
@@ -35,6 +41,7 @@ const TasksInput = (props) => {
           Добавить
         </button>
       </div>
+      <FilterBtns filterTodos={props.filterTodos} getLocalTodosAC={props.getLocalTodosAC} />
       <button className={s.tasksInput__deleteAllBtn} onClick={onAllTasksDelete}>
         Удалить все
       </button>
@@ -55,6 +62,8 @@ const mapStateToProps = (state) => ({
 const dispatchToProps = {
   addTask: addTaskTC,
   deleteAllTasks: deleteAllTasksTC,
+  filterTodos: filterTodosAC,
+  getLocalTodosAC
 };
 
 export default connect(mapStateToProps, dispatchToProps)(TasksInput);

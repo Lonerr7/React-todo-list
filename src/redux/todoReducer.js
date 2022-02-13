@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { filterTodos } from '../helpers/reducerHelper';
 
 const DELETE_TASK = 'DELETE_TASK';
 const TOGGLE_TASK_COMPLETION = 'TOGGLE_TASK_COMPLETION';
@@ -6,6 +7,7 @@ const ADD_TASK = 'ADD_TASK';
 const GET_LOCAL_TODOS = 'GET_LOCAL_TODOS';
 const DELETE_ALL_TASKS = 'DELETE_ALL_TASKS';
 const EDIT_TASK_INFO = 'EDIT_TASK_INFO';
+const FILTER_TODOS = 'FILTER_TODOS';
 
 const initialState = {
   todos: [],
@@ -64,6 +66,13 @@ const todoReducer = (state = initialState, action) => {
           }
         }),
       };
+    case FILTER_TODOS:
+      const localTodos = JSON.parse(localStorage.getItem('todos'));
+      if (action.filterProp === false) {
+        return filterTodos(state, localTodos, action.filterProp);
+      } else {
+        return filterTodos(state, localTodos, action.filterProp);
+      }
     default:
       return state;
   }
@@ -87,10 +96,12 @@ export const addTaskAC = (taskText) => ({
   taskText,
 });
 
-export const getLocalTodosAC = (todos) => ({
-  type: GET_LOCAL_TODOS,
-  todos,
-});
+export const getLocalTodosAC = (todos) => {
+  return {
+    type: GET_LOCAL_TODOS,
+    todos,
+  };
+};
 
 const deleteAllTasksAC = () => ({
   type: DELETE_ALL_TASKS,
@@ -100,6 +111,11 @@ const editTaskInfoAC = (id, newTaskText) => ({
   type: EDIT_TASK_INFO,
   id,
   newTaskText,
+});
+
+export const filterTodosAC = (filterProp) => ({
+  type: FILTER_TODOS,
+  filterProp,
 });
 
 export const deleteTaskTC = (id) => (dispatch) => {

@@ -1,0 +1,25 @@
+.tasksInput__filterBtns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.tasksInput__filterBtn {
+  border: none;
+  font-weight: 500;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.tasksInput__filterBtn_all {
+  background-color: bisque;
+}
+
+.tasksInput__filterBtn_done {
+  background-color: rgba(34, 194, 56, 0.4);
+}
+
+.tasksInput__filterBtn_undone {
+  background-color: rgba(240, 128, 128, 0.8);
+}
