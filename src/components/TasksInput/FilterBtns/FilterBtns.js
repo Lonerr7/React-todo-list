@@ -14,22 +14,28 @@ const FilterBtns = (props) => {
   };
 
   return (
-    <div className={s.tasksInput__filterBtns}>
-      <button
-        className={`${s.tasksInput__filterBtn} ${s.tasksInput__filterBtn_all}`} onClick={showAllTodos}
-      >
-        Все
-      </button>
-      <button
-        className={`${s.tasksInput__filterBtn} ${s.tasksInput__filterBtn_done}`} onClick={filterCompletedTodos}
-      >
-        Выполненные
-      </button>
-      <button
-        className={`${s.tasksInput__filterBtn} ${s.tasksInput__filterBtn_undone}`} onClick={filterUncompletedTodos}
-      >
-        Не выполненные
-      </button>
+    <div className={s.tasksInput__filterBtnsBox}>
+      <p className={s.tasksInput__filterBtnsTitle}>Фильтр</p>
+      <div className={s.tasksInput__filterBtns}>
+        <button
+          className={`${s.tasksInput__filterBtn} ${s.tasksInput__filterBtn_all}`}
+          onClick={showAllTodos}
+        >
+          Все
+        </button>
+        <button
+          className={`${s.tasksInput__filterBtn} ${s.tasksInput__filterBtn_done}`}
+          onClick={filterCompletedTodos}
+        >
+          Выполненные
+        </button>
+        <button
+          className={`${s.tasksInput__filterBtn} ${s.tasksInput__filterBtn_undone}`}
+          onClick={filterUncompletedTodos}
+        >
+          Не выполненные
+        </button>
+      </div>
     </div>
   );
 };

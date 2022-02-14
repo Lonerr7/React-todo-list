@@ -6,7 +6,14 @@
   justify-content: flex-start;
   align-items: center;
   overflow-y: auto;
-  // overflow-x: hidden;
+  overflow-x: hidden;
   height: 500px;
   padding: 20px
+}
+
+@media (max-width: 602px) {
+  .tasks__box {
+    max-height: 300px;
+    width: 100%;
+  }
 }

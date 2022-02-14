@@ -30,7 +30,6 @@
     display: block;
     background-color: transparent;
     font-weight: 500;
-    // border-radius: 30px;
     border: none;
   }
 
@@ -79,4 +78,12 @@
 
 .task__editSaveImg {
   cursor: pointer;
+}
+
+@media (max-width: 375px) {
+  .task__info, .task__info_crossed {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 23px;
+  }
 }

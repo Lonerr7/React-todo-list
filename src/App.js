@@ -4,10 +4,6 @@ import Tasks from './components/Tasks/Tasks';
 import TasksCount from './components/TasksCount/TasksCount';
 import TasksInput from './components/TasksInput/TasksInput';
 
-const AppContainer = (props) => {
-  return <App />;
-};
-
 const App = () => {
   return (
     <div className="app__wrapper">
@@ -24,4 +20,4 @@ const mapStateToProps = (state) => ({
 
 const dispatchToProps = {};
 
-export default connect(mapStateToProps, dispatchToProps)(AppContainer);
+export default connect(mapStateToProps, dispatchToProps)(App);

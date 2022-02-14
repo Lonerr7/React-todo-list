@@ -1,11 +1,17 @@
 .app__wrapper {
-  padding-top: 150px;
+  padding-top: 20px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: 28px;
   min-height: 50vh;
   width: 600px;
   margin: 0 auto;
+}
+
+@media (max-width: 602px) {
+  .app__wrapper {
+    width: 100%;
+  }
 }
