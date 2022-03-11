@@ -41,7 +41,10 @@ const TasksInput = (props) => {
           Добавить
         </button>
       </div>
-      <FilterBtns filterTodos={props.filterTodos} getLocalTodosAC={props.getLocalTodosAC} />
+      <FilterBtns
+        filterTodos={props.filterTodos}
+        getLocalTodosAC={props.getLocalTodosAC}
+      />
       <button className={s.tasksInput__deleteAllBtn} onClick={onAllTasksDelete}>
         Удалить все
       </button>
@@ -63,7 +66,7 @@ const dispatchToProps = {
   addTask: addTaskTC,
   deleteAllTasks: deleteAllTasksTC,
   filterTodos: filterTodosAC,
-  getLocalTodosAC
+  getLocalTodosAC,
 };
 
 export default connect(mapStateToProps, dispatchToProps)(TasksInput);

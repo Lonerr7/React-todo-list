@@ -4,6 +4,7 @@ import {
   deleteTaskTC,
   editTaskInfoTC,
   getLocalTodosTC,
+  setIsInitializedAC,
   toggleTaskCompletionTC,
 } from '../../redux/todoReducer';
 import Task from './Task/Task';
@@ -12,6 +13,7 @@ import s from './Tasks.module.scss';
 const TasksContainer = (props) => {
   useEffect(() => {
     props.getLocalTodos();
+    props.setIsInitializedSuccess(true);
   }, []);
 
   return <Tasks {...props} />;
@@ -42,6 +44,7 @@ const dispatchToProps = {
   toggleTaskCompletion: toggleTaskCompletionTC,
   getLocalTodos: getLocalTodosTC,
   editTaskInfo: editTaskInfoTC,
+  setIsInitializedSuccess: setIsInitializedAC,
 };
 
 export default connect(mapStateToProps, dispatchToProps)(TasksContainer);

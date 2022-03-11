@@ -8,9 +8,11 @@ const GET_LOCAL_TODOS = 'GET_LOCAL_TODOS';
 const DELETE_ALL_TASKS = 'DELETE_ALL_TASKS';
 const EDIT_TASK_INFO = 'EDIT_TASK_INFO';
 const FILTER_TODOS = 'FILTER_TODOS';
+const SET_IS_INITIALIZED = 'SET_IS_INITIALIZED';
 
 const initialState = {
   todos: [],
+  isInitialized: false,
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -73,6 +75,11 @@ const todoReducer = (state = initialState, action) => {
       } else {
         return filterTodos(state, localTodos, action.filterProp);
       }
+    case SET_IS_INITIALIZED:
+      return {
+        ...state,
+        isInitialized: action.isInitialized,
+      };
     default:
       return state;
   }
@@ -116,6 +123,11 @@ const editTaskInfoAC = (id, newTaskText) => ({
 export const filterTodosAC = (filterProp) => ({
   type: FILTER_TODOS,
   filterProp,
+});
+
+export const setIsInitializedAC = (isInitialized) => ({
+  type: SET_IS_INITIALIZED,
+  isInitialized,
 });
 
 export const deleteTaskTC = (id) => (dispatch) => {

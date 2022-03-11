@@ -8,6 +8,13 @@
   min-height: 50vh;
   width: 600px;
   margin: 0 auto;
+  transition: all 1s ease;
+  top: 0;
+}
+
+.hidden {
+  opacity: 0;
+  top: 300px;
 }
 
 @media (max-width: 602px) {

@@ -4,9 +4,11 @@ import Tasks from './components/Tasks/Tasks';
 import TasksCount from './components/TasksCount/TasksCount';
 import TasksInput from './components/TasksInput/TasksInput';
 
-const App = () => {
+const App = (props) => {
   return (
-    <div className="app__wrapper">
+    <div
+      className={props.isInitialized ? 'app__wrapper' : 'app__wrapper hidden'}
+    >
       <TasksCount />
       <TasksInput />
       <Tasks />
@@ -15,7 +17,7 @@ const App = () => {
 };
 
 const mapStateToProps = (state) => ({
-  todos: state.todo.todos,
+  isInitialized: state.todo.isInitialized,
 });
 
 const dispatchToProps = {};
