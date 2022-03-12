@@ -2,6 +2,7 @@ import s from './Task.module.scss';
 import edit from '../../../assets/images/edit.png';
 import tick from '../../../assets/images/tick.png';
 import { useState } from 'react';
+import { useSpring, animated } from 'react-spring';
 
 const Task = (props) => {
   const [editMode, setEditMode] = useState(false);
@@ -21,8 +22,13 @@ const Task = (props) => {
     setEditMode(!editMode);
   };
 
+  const transitionStyle = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  });
+
   return (
-    <div className={s.task__box}>
+    <animated.div className={s.task__box} style={transitionStyle}>
       <div className={props.isCompleted ? s.task__completed : s.task}>
         {editMode ? (
           <div className={s.task__editBox}>
@@ -33,7 +39,12 @@ const Task = (props) => {
               onChange={taskInfoChangeHandler}
               autoFocus={true}
             />
-            <img className={s.task__editSaveImg} src={tick} alt="tick" onClick={onNewTaskInfoAccept} />
+            <img
+              className={s.task__editSaveImg}
+              src={tick}
+              alt="tick"
+              onClick={onNewTaskInfoAccept}
+            />
           </div>
         ) : (
           <p
@@ -59,7 +70,7 @@ const Task = (props) => {
           </button>
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 };
 

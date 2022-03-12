@@ -14,6 +14,7 @@ const TasksContainer = (props) => {
   useEffect(() => {
     props.getLocalTodos();
     props.setIsInitializedSuccess(true);
+    // eslint-disable-next-line
   }, []);
 
   return <Tasks {...props} />;
