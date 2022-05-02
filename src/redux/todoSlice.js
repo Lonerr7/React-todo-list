@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 
 const initialState = {
   todos: [],
+  filteredTodos: [],
   isInitialized: false,
 };
 
@@ -40,9 +41,21 @@ const todoSlice = createSlice({
         }
       });
     },
+    deleteAllTasks(state) {
+      state.todos = [];
+    },
+    setFilteredTodos(state, action) {
+      state.filteredTodos = state.todos;
+    },
   },
 });
 
-export const { addTask, deleteTask, toggleTaskCompletion, changeTaskText } =
-  todoSlice.actions;
+export const {
+  addTask,
+  deleteTask,
+  toggleTaskCompletion,
+  changeTaskText,
+  deleteAllTasks,
+  setFilteredTodos,
+} = todoSlice.actions;
 export default todoSlice.reducer;

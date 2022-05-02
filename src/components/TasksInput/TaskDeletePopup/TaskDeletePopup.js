@@ -1,13 +1,17 @@
 import s from './TaskDeletePopup.module.scss';
+import { useDispatch } from 'react-redux';
+import { deleteAllTasks } from '../../../redux/todoSlice';
 
-const TaskDeletePopup = (props) => {
+const TaskDeletePopup = ({ setDeleteMode }) => {
+  const dispatch = useDispatch();
+
   const onBtnNoClick = () => {
-    props.setDeleteMode(false);
+    setDeleteMode(false);
   };
 
   const onBtnYesClick = () => {
-    props.deleteAllTasks();
-    props.setDeleteMode(false);
+    dispatch(deleteAllTasks());
+    setDeleteMode(false);
   };
 
   return (

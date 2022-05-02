@@ -6,7 +6,7 @@ const TasksContainer = (props) => {
   return <Tasks {...props} />;
 };
 
-const Tasks = (props) => {
+const Tasks = () => {
   const tasks = useSelector((state) => state.todos.todos);
   const taskElements = tasks.map((t) => (
     <Task

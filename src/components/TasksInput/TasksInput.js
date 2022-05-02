@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addTask } from '../../redux/todoSlice';
 
 const TasksInput = (props) => {
+  const tasksCount = useSelector((state) => state.todos.todos.length);
   const dispatch = useDispatch();
 
   const [taskText, setTaskText] = useState('');
@@ -20,6 +21,10 @@ const TasksInput = (props) => {
       dispatch(addTask({ text: taskText }));
       setTaskText('');
     }
+  };
+
+  const deleteModeOpener = () => {
+    if (tasksCount) setDeleteMode(true);
   };
 
   return (
@@ -40,11 +45,12 @@ const TasksInput = (props) => {
         filterTodos={props.filterTodos}
         getLocalTodosAC={props.getLocalTodosAC}
       />
-      <button className={s.tasksInput__deleteAllBtn}>Удалить все</button>
+      <button className={s.tasksInput__deleteAllBtn} onClick={deleteModeOpener}>
+        Удалить все
+      </button>
       {deleteMode ? (
         <TaskDeletePopup
           setDeleteMode={setDeleteMode}
-          deleteAllTasks={props.deleteAllTasks}
         />
       ) : null}
     </div>
