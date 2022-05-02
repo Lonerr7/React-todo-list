@@ -1,30 +1,25 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import {
-  addTaskTC,
-  deleteAllTasksTC,
-  filterTodosAC,
-  getLocalTodosAC,
-} from '../../redux/todoReducer';
 import FilterBtns from './FilterBtns/FilterBtns';
 import TaskDeletePopup from './TaskDeletePopup/TaskDeletePopup';
 import s from './TasksInput.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTask } from '../../redux/todoSlice';
 
 const TasksInput = (props) => {
+  const dispatch = useDispatch();
+
   const [taskText, setTaskText] = useState('');
   const [deleteMode, setDeleteMode] = useState(false);
 
-  const onTaskTextChange = (e) => {
+  const onTextType = (e) => {
     setTaskText(e.target.value);
   };
 
   const onTaskAdd = () => {
-    props.addTask(taskText);
-    setTaskText('');
-  };
-
-  const onAllTasksDelete = () => {
-    if (props.todos.length > 0) setDeleteMode(true);
+    if (taskText) {
+      dispatch(addTask({ text: taskText }));
+      setTaskText('');
+    }
   };
 
   return (
@@ -35,7 +30,7 @@ const TasksInput = (props) => {
           type="text"
           placeholder="Что Вы хотите сделать?"
           value={taskText}
-          onChange={onTaskTextChange}
+          onChange={onTextType}
         />
         <button className={s.tasksInput__btn} onClick={onTaskAdd}>
           Добавить
@@ -45,9 +40,7 @@ const TasksInput = (props) => {
         filterTodos={props.filterTodos}
         getLocalTodosAC={props.getLocalTodosAC}
       />
-      <button className={s.tasksInput__deleteAllBtn} onClick={onAllTasksDelete}>
-        Удалить все
-      </button>
+      <button className={s.tasksInput__deleteAllBtn}>Удалить все</button>
       {deleteMode ? (
         <TaskDeletePopup
           setDeleteMode={setDeleteMode}
@@ -58,15 +51,4 @@ const TasksInput = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  todos: state.todo.todos,
-});
-
-const dispatchToProps = {
-  addTask: addTaskTC,
-  deleteAllTasks: deleteAllTasksTC,
-  filterTodos: filterTodosAC,
-  getLocalTodosAC,
-};
-
-export default connect(mapStateToProps, dispatchToProps)(TasksInput);
+export default TasksInput;

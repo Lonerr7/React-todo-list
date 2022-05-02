@@ -1,12 +1,10 @@
-import { connect } from 'react-redux';
 import s from './TasksCount.module.scss';
+import { useSelector } from 'react-redux';
 
-const TasksCount = (props) => {
-  return <div className={s.tasksCount}>Всего задач: {props.tasksCount}</div>;
+const TasksCount = () => {
+  const tasksCount = useSelector((state) => state.todos.todos.length);
+
+  return <div className={s.tasksCount}>Всего задач: {tasksCount}</div>;
 };
 
-const mapStateToProps = (state) => ({
-  tasksCount: state.todo.todos.length,
-});
-
-export default connect(mapStateToProps, null)(TasksCount);
+export default TasksCount;
