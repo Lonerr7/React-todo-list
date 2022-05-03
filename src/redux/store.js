@@ -35,5 +35,4 @@ const store = configureStore({
 
 export const persister = persistStore(store);
 
-window.store = store;
 export default store;

@@ -7,7 +7,7 @@ const TasksContainer = (props) => {
 };
 
 const Tasks = () => {
-  const tasks = useSelector((state) => state.todos.todos);
+  const tasks = useSelector((state) => state.todos.filteredTodos);
   const taskElements = tasks.map((t) => (
     <Task
       taskInfo={t.taskText}

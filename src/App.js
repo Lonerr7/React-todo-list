@@ -1,18 +1,20 @@
-import { useEffect } from 'react';
 import './App.scss';
 import Tasks from './components/Tasks/Tasks';
 import TasksCount from './components/TasksCount/TasksCount';
 import TasksInput from './components/TasksInput/TasksInput';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { setFilteredTodos } from './redux/todoSlice';
 
 const App = (props) => {
   const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos.todos);
 
   useEffect(() => {
     dispatch(setFilteredTodos());
-    console.log(`filtered totds`);
-  }, []);
+
+    // eslint-disable-next-line
+  }, [todos]);
 
   return (
     // <div

@@ -1,16 +1,20 @@
+import { useDispatch } from 'react-redux';
 import s from './FilterBtns.module.scss';
+import { filterTodos, setFilteredTodos } from '../../../redux/todoSlice';
 
 const FilterBtns = (props) => {
+  const dispatch = useDispatch();
+
   const filterCompletedTodos = () => {
-    props.filterTodos(true);
+    dispatch(filterTodos({ isCompleted: true }));
   };
 
   const filterUncompletedTodos = () => {
-    props.filterTodos(false);
+    dispatch(filterTodos({ isCompleted: false }));
   };
 
   const showAllTodos = () => {
-    props.getLocalTodosAC(JSON.parse(localStorage.getItem('todos')));
+    dispatch(setFilteredTodos());
   };
 
   return (

@@ -44,8 +44,13 @@ const todoSlice = createSlice({
     deleteAllTasks(state) {
       state.todos = [];
     },
-    setFilteredTodos(state, action) {
+    setFilteredTodos(state) {
       state.filteredTodos = state.todos;
+    },
+    filterTodos(state, action) {
+      state.filteredTodos = state.todos.filter(
+        (todo) => todo.isCompleted === action.payload.isCompleted
+      );
     },
   },
 });
@@ -57,5 +62,6 @@ export const {
   changeTaskText,
   deleteAllTasks,
   setFilteredTodos,
+  filterTodos
 } = todoSlice.actions;
 export default todoSlice.reducer;
