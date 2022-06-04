@@ -2,13 +2,13 @@ import './App.scss';
 import Tasks from './components/Tasks/Tasks';
 import TasksCount from './components/TasksCount/TasksCount';
 import TasksInput from './components/TasksInput/TasksInput';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from './hooks/hooks';
 import { useEffect } from 'react';
 import { setFilteredTodos } from './redux/todoSlice';
 
-const App = (props) => {
-  const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos.todos);
+const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const todos = useAppSelector((state) => state.todos.todos);
 
   useEffect(() => {
     dispatch(setFilteredTodos());
@@ -17,13 +17,6 @@ const App = (props) => {
   }, [todos]);
 
   return (
-    // <div
-    //   className={props.isInitialized ? 'app__wrapper' : 'app__wrapper hidden'}
-    // >
-    //   <TasksCount />
-    //   <TasksInput />
-    //   <Tasks />
-    // </div>
     <div className={'app__wrapper'}>
       <TasksCount />
       <TasksInput />

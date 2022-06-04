@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import FilterBtns from './FilterBtns/FilterBtns';
 import TaskDeletePopup from './TaskDeletePopup/TaskDeletePopup';
 import s from './TasksInput.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { addTask } from '../../redux/todoSlice';
 
-const TasksInput = (props) => {
-  const tasksCount = useSelector((state) => state.todos.todos.length);
-  const dispatch = useDispatch();
+const TasksInput: React.FC = () => {
+  const tasksCount = useAppSelector((state) => state.todos.todos.length);
+  const dispatch = useAppDispatch();
 
   const [taskText, setTaskText] = useState('');
   const [deleteMode, setDeleteMode] = useState(false);
 
-  const onTextType = (e) => {
+  const onTextType = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTaskText(e.target.value);
   };
 
@@ -41,18 +41,11 @@ const TasksInput = (props) => {
           Добавить
         </button>
       </div>
-      <FilterBtns
-        filterTodos={props.filterTodos}
-        getLocalTodosAC={props.getLocalTodosAC}
-      />
+      <FilterBtns />
       <button className={s.tasksInput__deleteAllBtn} onClick={deleteModeOpener}>
         Удалить все
       </button>
-      {deleteMode ? (
-        <TaskDeletePopup
-          setDeleteMode={setDeleteMode}
-        />
-      ) : null}
+      {deleteMode ? <TaskDeletePopup setDeleteMode={setDeleteMode} /> : null}
     </div>
   );
 };

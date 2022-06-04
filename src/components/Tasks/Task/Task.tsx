@@ -3,15 +3,21 @@ import edit from '../../../assets/images/edit.png';
 import tick from '../../../assets/images/tick.png';
 import { useState } from 'react';
 import { useSpring, animated } from 'react-spring';
-import { useDispatch } from 'react-redux';
 import {
   deleteTask,
   toggleTaskCompletion,
   changeTaskText,
 } from '../../../redux/todoSlice';
+import { useAppDispatch } from '../../../hooks/hooks';
 
-const Task = ({ taskInfo, isCompleted, id }) => {
-  const dispatch = useDispatch();
+type TaskProps = {
+  taskInfo: string;
+  isCompleted: boolean;
+  id: string;
+};
+
+const Task: React.FC<TaskProps> = ({ taskInfo, isCompleted, id }) => {
+  const dispatch = useAppDispatch();
 
   const [editMode, setEditMode] = useState(false);
   const [taskText, setTaskText] = useState(taskInfo);

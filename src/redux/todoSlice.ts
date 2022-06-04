@@ -1,7 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 
-const initialState = {
+type Todo = {
+  id: string;
+  taskText: string;
+  isCompleted: boolean;
+};
+
+type TodosState = {
+  todos: Array<Todo>;
+  filteredTodos: Array<Todo>;
+  isInitialized: boolean;
+};
+
+const initialState: TodosState = {
   todos: [],
   filteredTodos: [],
   isInitialized: false,
@@ -11,17 +23,20 @@ const todoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    addTask(state, action) {
+    addTask(state, action: PayloadAction<{ text: string }>) {
       state.todos.push({
         id: nanoid(8),
         taskText: action.payload.text,
         isCompleted: false,
       });
     },
-    deleteTask(state, action) {
+    deleteTask(state, action: PayloadAction<{ id: string }>) {
       state.todos = state.todos.filter((t) => t.id !== action.payload.id);
     },
-    toggleTaskCompletion(state, action) {
+    toggleTaskCompletion(
+      state,
+      action: PayloadAction<{ id: string; isCompleted: boolean }>
+    ) {
       state.todos = state.todos.map((t) => {
         if (t.id === action.payload.id) {
           t.isCompleted = action.payload.isCompleted;
@@ -31,7 +46,10 @@ const todoSlice = createSlice({
         }
       });
     },
-    changeTaskText(state, action) {
+    changeTaskText(
+      state,
+      action: PayloadAction<{ id: string; newTaskText: string }>
+    ) {
       state.todos = state.todos.map((t) => {
         if (t.id === action.payload.id) {
           t.taskText = action.payload.newTaskText;
@@ -62,6 +80,6 @@ export const {
   changeTaskText,
   deleteAllTasks,
   setFilteredTodos,
-  filterTodos
+  filterTodos,
 } = todoSlice.actions;
 export default todoSlice.reducer;

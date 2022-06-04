@@ -1,9 +1,9 @@
-import { useDispatch } from 'react-redux';
 import s from './FilterBtns.module.scss';
 import { filterTodos, setFilteredTodos } from '../../../redux/todoSlice';
+import { useAppDispatch } from '../../../hooks/hooks';
 
-const FilterBtns = (props) => {
-  const dispatch = useDispatch();
+const FilterBtns: React.FC = () => {
+  const dispatch = useAppDispatch();
 
   const filterCompletedTodos = () => {
     dispatch(filterTodos({ isCompleted: true }));

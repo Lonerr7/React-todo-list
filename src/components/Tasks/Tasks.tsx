@@ -1,13 +1,9 @@
 import Task from './Task/Task';
 import s from './Tasks.module.scss';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks/hooks';
 
-const TasksContainer = (props) => {
-  return <Tasks {...props} />;
-};
-
-const Tasks = () => {
-  const tasks = useSelector((state) => state.todos.filteredTodos);
+const Tasks: React.FC = () => {
+  const tasks = useAppSelector((state) => state.todos.filteredTodos);
   const taskElements = tasks.map((t) => (
     <Task
       taskInfo={t.taskText}
@@ -20,4 +16,4 @@ const Tasks = () => {
   return <div className={s.tasks__box}>{taskElements}</div>;
 };
 
-export default TasksContainer;
+export default Tasks;
