@@ -11,9 +11,11 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import filtersSlice from './filtersSlice';
 
 const rootReducer = combineReducers({
   todos: todoSlice,
+  filters: filtersSlice,
 });
 
 const persistConfig = {

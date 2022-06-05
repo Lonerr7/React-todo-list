@@ -1,21 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-
-type Todo = {
-  id: string;
-  taskText: string;
-  isCompleted: boolean;
-};
-
-type TodosState = {
-  todos: Array<Todo>;
-  filteredTodos: Array<Todo>;
-  isInitialized: boolean;
-};
+import { TodosState } from '../types/types';
 
 const initialState: TodosState = {
   todos: [],
-  filteredTodos: [],
   isInitialized: false,
 };
 
@@ -62,14 +50,6 @@ const todoSlice = createSlice({
     deleteAllTasks(state) {
       state.todos = [];
     },
-    setFilteredTodos(state) {
-      state.filteredTodos = state.todos;
-    },
-    filterTodos(state, action) {
-      state.filteredTodos = state.todos.filter(
-        (todo) => todo.isCompleted === action.payload.isCompleted
-      );
-    },
   },
 });
 
@@ -79,7 +59,5 @@ export const {
   toggleTaskCompletion,
   changeTaskText,
   deleteAllTasks,
-  setFilteredTodos,
-  filterTodos,
 } = todoSlice.actions;
 export default todoSlice.reducer;

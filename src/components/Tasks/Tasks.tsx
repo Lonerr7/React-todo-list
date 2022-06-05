@@ -1,9 +1,10 @@
 import Task from './Task/Task';
 import s from './Tasks.module.scss';
 import { useAppSelector } from '../../hooks/hooks';
+import { selectTodosByFilter } from '../../redux/selectors';
 
 const Tasks: React.FC = () => {
-  const tasks = useAppSelector((state) => state.todos.filteredTodos);
+  const tasks = useAppSelector(selectTodosByFilter);
   const taskElements = tasks.map((t) => (
     <Task
       taskInfo={t.taskText}

@@ -1,20 +1,21 @@
 import s from './FilterBtns.module.scss';
-import { filterTodos, setFilteredTodos } from '../../../redux/todoSlice';
 import { useAppDispatch } from '../../../hooks/hooks';
+import { setFilter } from '../../../redux/filtersSlice';
+import { Filters } from '../../../types/types';
 
 const FilterBtns: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const filterCompletedTodos = () => {
-    dispatch(filterTodos({ isCompleted: true }));
+    dispatch(setFilter(Filters.completed));
   };
 
   const filterUncompletedTodos = () => {
-    dispatch(filterTodos({ isCompleted: false }));
+    dispatch(setFilter(Filters.uncompleted));
   };
 
   const showAllTodos = () => {
-    dispatch(setFilteredTodos());
+    dispatch(setFilter(Filters.all));
   };
 
   return (
